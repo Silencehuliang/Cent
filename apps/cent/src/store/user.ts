@@ -89,7 +89,9 @@ export const useUserStore = create<UserStore>()(
                 }
             };
 
-            updateUserInfo();
+            updateUserInfo().catch(() => {
+                // 未登录（无 token）时忽略该错误，登录状态由 expired 标记体现
+            });
 
             const getUserInfo = async (login: string) => {
                 const run = async () => {
