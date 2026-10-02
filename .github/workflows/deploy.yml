@@ -30,8 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 55bbf1431c6d6ea28b1237b601cc1338
-          command: pages deploy dist --project-name=cent --branch=main --commit-dirty=true
+        run: npx --yes wrangler@4 pages deploy dist --project-name=cent --branch=main --commit-dirty=true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "55bbf1431c6d6ea28b1237b601cc1338"
